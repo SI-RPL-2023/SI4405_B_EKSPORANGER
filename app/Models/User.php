@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
+// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -21,6 +21,9 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'id_role',
+        'phone_number',
+        'address',
     ];
 
     /**
@@ -41,4 +44,26 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    public function role(){
+        return $this->belongsTo(Role::class, 'id_role', 'id');
+    }
+    public function isAdmin() {
+    if (auth()->check()) {
+        return $this->role()->where('name', 'admin')->exists();
+    }
+        return false; 
+    }
+    public function isImportir() {
+    if (auth()->check()) {
+        return $this->role()->where('name', 'pengimpor')->exists();
+    }
+        return false; 
+    }
+    public function isEksportir() {
+    if (auth()->check()){
+        return $this->role()->where('name', 'pengekspor')->exists();
+    }
+        return false; 
+    }
+
 }
