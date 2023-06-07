@@ -52,3 +52,15 @@ class AdminController extends Controller
     public function prosesverifikasipickup(Request $request, $id){
         $prosesverifikasipickup = Pick_up::find($id);
         $prosesverifikasipickup->update($request->except('_token'));
+
+        if($prosesverifikasipickup){
+            Session::flash('status', 'success');
+            Session::flash('message', 'Verifikasi pick up selesai');
+            return redirect('permintaanpickup/verifikasipermintaan/'.$id);
+        } else {
+            Session::flash('status', 'failed');
+            Session::flash('message', 'Verifikasi pick up gagal');
+            return redirect('permintaanpickup/verifikasipermintaan/'.$id);
+        }
+    }
+}
