@@ -14,12 +14,12 @@
     <table class="table">
         <thead>
             <tr>
-                <th scope="col" class="text-center">Foto Barang</th>
-                <th scope="col" class="text-center">Nama Barang</th>
-                <th scope="col" class="text-center">Harga Barang</th>
-                <th scope="col" class="text-center">Deskripsi Barang</th>
-                <th scope="col" class="text-center">Status Kelayakan</th>
-                <th scope="col" class="text-center">Action</th>
+                <th scope="col" class="text-center" width="17%">Foto Barang</th>
+                <th scope="col" class="text-center" width="17%">Nama Barang</th>
+                <th scope="col" class="text-center" width="17%">Harga Barang</th>
+                <th scope="col" class="text-center" width="17%">Deskripsi Barang</th>
+                <th scope="col" class="text-center" width="17%">Status Kelayakan</th>
+                <th scope="col" class="text-center" width="15%">Action</th>
             </tr>
         </thead>
         <tbody class="table-group-divider">   

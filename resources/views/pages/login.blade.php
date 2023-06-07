@@ -1,16 +1,10 @@
 @extends('layout.master')
 @section('content')
-
-<div class="container px-5 py-5 mt-5 align-items-center">
-        <div class="row align-items-center">
-            <div class="col-sm">
-            <img src="{{url ('/assets/img/loginbg.jpg')}}" alt="gambar login" width="500px" height="500px">    
-            </div>
- <!-- <div class="container-fluid">
+ <div class="container-fluid">
         <div class="row align-items-center">
             <div class="col-xl-6 d-none d-xl-block" style="margin-left: -12px;">
                 <img src="{{url ('/assets/img/login.jpg')}}" alt="gambar login" width="588px" height="647px">
-            </div> -->
+            </div>
             <div class="col-xl-4 mt-4">
                 <h1 class="fw-bold mb-4">Login</h1>
                 @if(Session::has('status'))
@@ -34,7 +28,7 @@
                         <input type="checkbox" name="remember" id="remember">                
                         <label for="remember">Remember Me</label>
                     </div>
-                     <button type="submit" class="btn btn-primary" tabindex="-1" role="button" style="width: 140px;">Login</button>
+                     <button type="submit" class="btn btn-dark" tabindex="-1" role="button" style="width: 140px;">Login</button>
                     <h6 class="forRegister fw-normal mt-3 text-dark fs-5">Anda belum punya akun? <a href="/signin" style="text-decoration: none;">Daftar</a></h6>
                 </form>
             </div>

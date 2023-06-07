@@ -54,4 +54,9 @@
     </div>
   <!-- end form verifikasi -->
 
+  <!-- footer -->
+  <footer>
+        @include('parts.footer')
+    </footer>
+  <!-- end footer -->
 @endsection

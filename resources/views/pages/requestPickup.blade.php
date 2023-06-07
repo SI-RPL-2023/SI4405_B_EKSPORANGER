@@ -25,7 +25,7 @@
     <!-- form request pick up -->
     <div class="container d-flex justify-content-center">
         <div class="card" style="width:42rem;">
-        <h5 class="card-header text-dark">Request Pick Barang</h5>
+        <h5 class="card-header text-dark">Request Pick Barang - <span class="fw-light">{{$requestPickup -> product -> nama_barang}} oleh {{$requestPickup -> nama_pemesan}}</span></h5>
             <div class="card-body">
                 <form class="row g-3" action="" method="POST">
                     @csrf
@@ -35,7 +35,7 @@
                     </div>
                     <div class="col-md-6">
                         <label for="inputPassword4" class="form-label fst-normal text-dark">Nama produk</label>
-                        <input type="text" class="form-control" id="inputPassword4" placeholder="nama produk yang akan di pick up" name="nama_produk">
+                        <input type="text" class="form-control" id="inputPassword4" placeholder="nama produk yang akan di pick up" name="nama_produk" readonly value="{{$requestPickup -> product -> nama_barang}}">
                     </div>
                     <div class="col-md-6">
                         <label for="inputEmail4" class="form-label fst-normal text-dark">Alamat penjemputan</label>
@@ -43,7 +43,7 @@
                     </div>
                     <div class="col-md-6">
                         <label for="inputPassword4" class="form-label fst-normal text-dark">No. telpon</label>
-                        <input type="text" class="form-control" id="inputPassword4" placeholder="Nomor telpon" name="no_telpon">
+                        <input type="text" class="form-control" id="inputPassword4" placeholder="Nomor telpon" name="no_telpon" readonly value="{{$requestPickup -> no_telpon}}">
                     </div>
                     <div class="col-12">
                         <label for="inputAddress" class="form-label fst-normal text-dark mb-3">Jenis pengimiram cargo</label> 
@@ -81,7 +81,7 @@
                     </div>
                     <div class="col-12">
                         <label for="exampleFormControlTextarea1" class="form-label fst-normal text-dark">Detail Produk</label>
-                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="detail_produk" placeholder="cantumkan detail produk dengan jelas agar produk anda aman"></textarea>
+                        <textarea class="form-control" id="exampleFormControlTextarea1" readonly rows="3" name="detail_produk">{{$requestPickup -> product -> deskripsi_barang}}</textarea>
                     </div>
                     <div class="mb-3 form-check">
                         <input type="checkbox" class="form-check-input ms-1 me-3" id="exampleCheck1" required>

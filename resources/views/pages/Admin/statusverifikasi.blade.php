@@ -33,7 +33,7 @@
                             <option disabled selected value="">pilih status konfirmasi</option>
                             <option value="Menunggu konfirmasi" @if($statusverifikasi -> status_kelayakan == "Menunggu konfirmasi") selected @endif>Menunggu Konfirmasi</option>
                             <option value="Disetujui" @if($statusverifikasi -> status_kelayakan == "Disetujui") selected @endif>Disetujui</option>
-                            <option value="Ditolak" @if($statusverifikasi -> status_kelayakan == "Ditolak") selected @endif>Ditolak</option>
+                            <option value="Ditolak (Mohon perbaiki deskripsi barang / foto)" @if($statusverifikasi -> status_kelayakan == "Ditolak (Mohon perbaiki deskripsi barang / foto)") selected @endif>Ditolak (Mohon perbaiki deskripsi barang / foto)</option>
                         </select>
                     </div>
                     <div class="mb-3">

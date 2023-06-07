@@ -25,11 +25,15 @@
     <section class="section" id="product">
         <div class="container">
             <div class="row">
-                <div class="col-7">
+                <div class="col-7 mx-auto">
                     <div class="card" style="width: 36rem;">
                     <img src="{{asset ('storage/images/'.$detailProduct -> foto_barang)}}" class="card-img-top" alt="{{$detailProduct -> nama_barang}}">
                         <div class="card-body">
                             <h3 class="card-title">{{$detailProduct -> nama_barang}}</h3>
+                            @if(Auth::check() && Auth::user()->isEksportir())
+                            <p class="fs-6">Status produk : {{$detailProduct -> status_kelayakan}}</p>
+                            @endif
+                            <hr>
                             <p class="card-text">{{$detailProduct -> deskripsi_barang}}</p>
                             <hr>
                             <img
@@ -41,6 +45,12 @@
                                 <h5>Harga barang</h5>
                                 <input type="text" readonly class="form-control-plaintext font-weight-bold" value="Rp. {{number_format($detailProduct -> harga_barang,0)}}">
                             </div>
+                            @if(Auth::check() && Auth::user()->isEksportir())
+                            <hr>
+                           <a href="/updateProduk/{{$detailProduct->id}}" class="btn btn-info" style="width: 100%; color: #fff; background: #0dcaf0;">
+                            Update Produk
+                        </a>
+                        @endif
                         </div>
                     </div>
                 </div>
@@ -51,7 +61,7 @@
                             Isi data pemesanan
                         </div>
                         <div class="card-body">
-                            <form method="POST" action="/payments" enctype="multipart/form-data">
+                            <form method="POST" action="" enctype="multipart/form-data">
                                 @csrf
                                 <input type="hidden" name="produk_dibeli" value="{{$detailProduct -> nama_barang}}">
                                 <input type="hidden" value="{{$detailProduct -> harga_barang}}" name="harga">

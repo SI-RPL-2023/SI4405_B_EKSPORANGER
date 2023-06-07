@@ -7,7 +7,7 @@
   <!-- end navbar -->
 
   <!-- table -->
-  <div class="container" style="margin-top: 100px;">
+  <div class="container" style="margin-top: 120px;">
     <div class="col-lg-4 mb-4">
         <h1 class="fs-4 mb-3" style="font-weight: 600;">Product menunggu verifikasi</h1>
         <form class="form-inline search-form d-flex justify-content-end" action="" method="get">
