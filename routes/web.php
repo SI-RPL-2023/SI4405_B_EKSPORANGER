@@ -35,7 +35,7 @@ Route::get('/permintaanpickup/detailpermintaan/{id}', [AdminController::class, '
 Route::get('/permintaanpickup/verifikasipermintaan/{id}', [AdminController::class, 'verifikasiPermintaanPickUp']);
 Route::put('/permintaanpickup/verifikasipermintaan/{id}', [AdminController::class, 'prosesverifikasipickup']);
 
-// halamaan eksportir
+// halamaan eksport
 Route::get('/addproduct', [UserController::class, 'addProduct'])->middleware('auth');
 Route::post('/addproduct', [UserController::class, 'insertProduct'])->middleware('auth');
 Route::get('/product', [UserController::class, 'daftarproduct'])->middleware('auth');
@@ -50,7 +50,7 @@ Route::get('/updateProduk/{id}', [UserController::class, 'updateProduk'])->middl
 Route::put('/updateProduk/{id}', [UserController::class, 'revisiProduk'])->middleware('auth');
 Route::get('/pickup', [UserController::class, 'pickup'])->middleware('auth');
 
-// halamanan importir
+// halamanan import
 Route::get('/pesanan', [UserController::class, 'pesanan'])->middleware('auth');
 Route::get('/pesanan/detailPesanan/{id}', [UserController::class, 'detailpesanan'])->middleware('auth');
 Route::get('/pesanan/statusPesanan/{id}', [UserController::class, 'statusPesanan'])->middleware('auth');
