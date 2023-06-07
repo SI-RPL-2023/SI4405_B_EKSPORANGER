@@ -6,7 +6,7 @@
                 <img src="{{url ('/assets/img/login.jpg')}}" alt="gambar login" width="588px" height="647px">
             </div>
             <div class="col-xl-4 mt-4">
-                <h1 class="fw-bold mb-4">Login</h1>
+                
                 @if(Session::has('status'))
                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
                     {{Session::get('message')}}
