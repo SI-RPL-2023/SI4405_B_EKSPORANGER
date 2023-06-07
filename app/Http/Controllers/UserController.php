@@ -138,3 +138,94 @@ class UserController extends Controller
             return redirect('/addproduct');
         }
     }
+    public function daftarproduct(Request $request){
+        $cari = $request->cari;
+        $listProduct = Product::where('nama_barang', 'LIKE', '%'. $cari. '%')
+        ->where('status_kelayakan', 'disetujui')
+        ->paginate(15);
+        return view('pages.DaftarProduct', compact(['listProduct']));
+    }
+    public function detailProduct($id){
+        $detailProduct = Product::find($id);
+        return view('pages.detailProduct', compact(['detailProduct']));
+    }
+    public function payments(Request $request, $id){
+        $getid = Product::find($id);
+        $ekstensi = $request->file('bukti_pembayaran')->clientExtension();
+        $nama = $request->nama_pemesan.'-'.now()->timestamp.'.'.$ekstensi;
+        $request->file('bukti_pembayaran')->storeAs('images', $nama);
+
+        // Hitung total harga berdasarkan jumlah pemesanan
+        $total_harga = $request->harga * $request->jumlah_pemesan;
+
+        $payments = Transaction::create([
+            'id_product' => $getid -> id,
+            'nama_pemesan' => $request->nama_pemesan,
+            'email' => $request->email,
+            'no_telpon' => $request->no_telpon,
+            'produk_dibeli' => $request->produk_dibeli,
+            'jumlah_pemesan' => $request->jumlah_pemesan,
+            'harga' => $total_harga, // Gunakan total harga yang telah dihitung sebelumnya
+            'bukti_pembayaran' => $nama,
+            'status_pemesanan' => 'Pending',
+        ]);
+        if($payments){
+            return redirect('/sukses');
+        } 
+    }
+    public function sukses(){
+        return view('pages.sukses');
+    }
+    public function daftarRequest(){
+        $daftarRequest = ModelsRequest::all();
+        return view('pages.daftarRequest', compact('daftarRequest'));
+    }
+    public function detailRequest($id){
+        $detailRequest = ModelsRequest::find($id);
+        return view('pages.detailRequest', compact('detailRequest'));
+    }
+    public function requestBarang(){
+        return view('pages.requestBarang');
+    }
+    public function updateStatus($id){
+        $updateStatus = ModelsRequest::find($id);
+        return view('pages.updateStatusRequest', compact('updateStatus'));
+    }
+    
+    public function requestmade(Request $request){
+        $insertProduct = ModelsRequest::create([
+            'kategori' => $request->kategori,
+            'nama_produk' => $request->nama_produk,
+            'jumlah' => $request->jumlah,
+            'detail_produk' => $request->detail_produk,
+            'status_request' => 'Sedang dicari',
+        ]);
+        if($insertProduct){
+            Session::flash('status', 'success');
+            Session::flash('message', 'Request barang berhasil dibuat');
+            return redirect('/requestBarang');
+        } else {
+            Session::flash('status', 'failed');
+            Session::flash('message', 'Request barang gagal dibuat');
+            return redirect('/requestBarang');
+        }
+    }
+    public function updateStatusRequest(Request $request, $id){
+        $updateStatusRequest = ModelsRequest::find($id);
+        $updateStatusRequest->update($request->except('_token'));
+
+        if($updateStatusRequest){
+            Session::flash('status', 'success');
+            Session::flash('message', 'Status berhasil dirubah');
+            return redirect('/daftarRequest');
+        } else {
+            Session::flash('status', 'failed');
+            Session::flash('message', 'Status gagal dirubah');
+            return redirect('/daftarRequest');
+        }
+    }
+    public function pencairandana(){
+        $listTransaction =Transaction::all();
+        return view('pages.pencairanDana', compact('listTransaction'));
+    }
+}
