@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Pick_up;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -28,7 +29,7 @@ class AdminController extends Controller
         $statusverification->update($request->except('_token'));
         if($statusverification){
         Session::flash('status', 'success');
-        Session::flash('message', 'produk terverifikasi');
+        Session::flash('message', 'Proses verifikasi selesai');
         return redirect('/verifikasi/VerifikasiProduct/'.$id);
         } else {
             Session::flash('status', 'failed');
@@ -36,4 +37,18 @@ class AdminController extends Controller
             return redirect('/verifikasi/VerifikasiProduct/'.$id);
         }
     }
-}
+    public function permintaanpickup(){
+        $permintaanpickup = Pick_up::all();
+        return view('pages.PermintaanPickup', compact('permintaanpickup'));
+    }
+    public function detailpermintaan($id){
+        $detailpermintaan = Pick_up::find($id);
+        return view('pages.detailPermintaanPickUp', compact('detailpermintaan'));
+    }
+    public function verifikasiPermintaanPickUp($id){
+        $verifikasiPermintaanPickUp = Pick_up::find($id);
+        return view('pages.verifikasiPermintaanPickUp', compact('verifikasiPermintaanPickUp'));
+    }
+    public function prosesverifikasipickup(Request $request, $id){
+        $prosesverifikasipickup = Pick_up::find($id);
+        $prosesverifikasipickup->update($request->except('_token'));
